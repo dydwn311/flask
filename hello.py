@@ -33,5 +33,25 @@ def html_file():
     return render_template('index.html')
 
 
+@app.route('/variable')
+def variable():
+    name ="해피해킹"
+    return render_template('variable.html',html_name=name)
+
+@app.route('/greeting/<string:name>')
+def greeting(name):
+    def_name = name
+    return render_template('greeting.html', html_name = def_name)
+
+@app.route('/cube/<int:num>')
+def cube(num):
+    cube_num = num**3
+    return render_template('cube.html',num =num, cube_num = cube_num)
+
+
+
+
+
+#
 if __name__=='__main__':
-    app.run(debug=True)
+    app.run(debug=True) #이걸로 인해 개발자 모드로 서버를 킬 필요가없음
