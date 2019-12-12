@@ -1,5 +1,8 @@
 from flask import Flask, escape, request, render_template
 import random
+import requests
+from bs4 import BeautifulSoup
+
 app = Flask(__name__)
 #이코드는 flask 홈페이지에서 가저온 버전
 
@@ -105,6 +108,11 @@ def pong():
     #post방식
     keyword =request.form.get('keyword')
     return render_template('pong.html', keyword=keyword)
+
+@app.route('/asset')
+def asset():
+    
+    return render_template('asset.html')
    
 
 @app.route('/naver')
@@ -116,6 +124,26 @@ def naver():
 def google():
     
     return render_template('google.html')
+
+@app.route('/summoner')
+def summoner():
+    
+    return render_template('summoner.html')
+
+@app.route('/opgg')
+def opgg():
+    #username = request.args.get('username') 키 값이 username인 값을 가저와라 (dictionary)
+    username = request.args.get('username')
+    opgg_url = f'https://www.op.gg/summoner/userName={username}'
+    
+
+    res = requests.get(opgg_url).text
+    soup = BeautifulSoup(res,'html.parser')
+    tier = soup.select_one("#SummonerLayoutContent > div.tabItem.Content.SummonerLayoutContent.summonerLayout-summary > div.SideContent > div.TierBox.Box > div > div.TierRankInfo > div.TierRank")
+    print(res)
+    print(soup)
+
+    return render_template('opgg.html', username=username, opgg_url=opgg_url,tier=tier.text)
 
 
 #url에 데이터가 뜨면 get방식 아니면 post 방식이다
