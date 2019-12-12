@@ -89,7 +89,40 @@ def movies():
     return render_template('movies.html',movies =movies)
 
 
+@app.route('/ping')
+def ping():
+    return render_template('ping.html')
 
 
+@app.route('/pong', methods = ['GET', 'POST'])
+def pong():
+    #print(request.form.get('keyword'))
+    
+    #get방식 html파일에서도 method 바꿔줘야한다.
+    #keyword =request.args.get('keyword')
+
+
+    #post방식
+    keyword =request.form.get('keyword')
+    return render_template('pong.html', keyword=keyword)
+   
+
+@app.route('/naver')
+def naver():
+    
+    return render_template('naver.html')
+
+@app.route('/google')
+def google():
+    
+    return render_template('google.html')
+
+
+#url에 데이터가 뜨면 get방식 아니면 post 방식이다
 if __name__=='__main__':
     app.run(debug=True) #이걸로 인해 개발자 모드로 서버를 킬 필요가없음
+
+
+#get방식 : 서버야 나 이것좀 줘
+
+#post방식 : 서버야 나 이것좀 처리해줘 / post는 form방식으로 보통 
