@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>현재 영화 상영 리스트 {{movies}}</h1>
+    {% for movie in movies %} <!-- 이거 안에 파이썬 문법으로 로직작성 가능-->
+
+        {% if movie == '겨울왕국2' %}
+            <li style = "color:blue">{{movie}}</li>
+        {% else %}
+            <li style = "color: red">{{movie}}</li>
+        {% endif %}
+    {% endfor %} <!-- for을 끝낼때는 이렇게 닫아줘야 한다.-->
+</body>
+
+{# 진자는 이안에 있는것을 주석으로 읽는다 #}
+</html>
